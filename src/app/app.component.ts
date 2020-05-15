@@ -6,7 +6,7 @@ import { products } from './products';
 @Component({
     selector: 'app-root',
     template: `
-        <kendo-grid [data]="gridData" [height]="410">
+        <kendo-grid [data]="gridData" [height]="1000">
             <kendo-grid-column field="ProductID" title="ID" width="40">
             </kendo-grid-column>
             <kendo-grid-column field="ProductName" title="Name" width="250">
@@ -20,7 +20,6 @@ import { products } from './products';
                   [data]="listItems"
                   [textField]="'text'"
                   [valueField]="'value'"
-                  [(ngModel)]="selectedItem"
               >
               </kendo-dropdownlist>
               </ng-template>
@@ -36,7 +35,7 @@ import { products } from './products';
             </kendo-grid-column>
             <kendo-grid-column field="default" title="Default" width="120">
                 <ng-template kendoGridCellTemplate let-dataItem>
-                    <input type="checkbox" [checked]="dataItem.Discontinued"/>
+                    <input type="checkbox" [checked]="dataItem.ProductID%2==0"/>
                 </ng-template>
             </kendo-grid-column>
         </kendo-grid>
@@ -44,11 +43,12 @@ import { products } from './products';
 })
 export class AppComponent {
   public gridData: any[] = products;
-  public defaultItem: { text: string, value: number } = { text: "Medium", value: 2 }
   public listItems: Array<{ text: string, value: number }> = [
         { text: "Small", value: 1 },
         { text: "Medium", value: 2 },
         { text: "Large", value: 3 }
     ];
-  public selectedItem: Item = this.listItems[1];
+  public defaultItem: { text: string, value: number } = this.listItems[2];
+
+  public show: boolean = true;
 }
