@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NgModule } from '@angular/core';
+
 import { products } from './products';
 
 @Component({
@@ -9,9 +11,18 @@ import { products } from './products';
             </kendo-grid-column>
             <kendo-grid-column field="ProductName" title="Name" width="250">
             </kendo-grid-column>
-            <kendo-grid-column title="Category">
+            <kendo-grid-column field="QuantityPerUnit" title="Quantity" width="250">
+            </kendo-grid-column>
+            <kendo-grid-column title="Roles">
               <ng-template kendoGridCellTemplate let-dataItem>
-                  <kendo-dropdownlist [data]="listItems"></kendo-dropdownlist>
+              <kendo-dropdownlist
+                  [defaultItem]="defaultItem"
+                  [data]="listItems"
+                  [textField]="'text'"
+                  [valueField]="'value'"
+                  [(ngModel)]="selectedItem"
+              >
+              </kendo-dropdownlist>
               </ng-template>
             </kendo-grid-column>
             <kendo-grid-column field="UnitPrice" title="Price" width="80">
@@ -32,6 +43,12 @@ import { products } from './products';
     `
 })
 export class AppComponent {
-    public gridData: any[] = products;
-    public listItems: Array<string> = ["Item 1", "Item 2", "Item 3"];
+  public gridData: any[] = products;
+  public defaultItem: { text: string, value: number } = { text: "Medium", value: 2 }
+  public listItems: Array<{ text: string, value: number }> = [
+        { text: "Small", value: 1 },
+        { text: "Medium", value: 2 },
+        { text: "Large", value: 3 }
+    ];
+  public selectedItem: Item = this.listItems[1];
 }
