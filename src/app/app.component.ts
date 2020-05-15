@@ -16,10 +16,8 @@ import { products } from './products';
             <kendo-grid-column title="Roles">
               <ng-template kendoGridCellTemplate let-dataItem>
               <kendo-dropdownlist
-                  [defaultItem]="defaultItem"
+                  [defaultItem]="dataItem.Category.CategoryName"
                   [data]="listItems"
-                  [textField]="'text'"
-                  [valueField]="'value'"
               >
               </kendo-dropdownlist>
               </ng-template>
@@ -43,12 +41,8 @@ import { products } from './products';
 })
 export class AppComponent {
   public gridData: any[] = products;
-  public listItems: Array<{ text: string, value: number }> = [
-        { text: "Small", value: 1 },
-        { text: "Medium", value: 2 },
-        { text: "Large", value: 3 }
-    ];
-  public defaultItem: { text: string, value: number } = this.listItems[2];
+  public listItems: Array<string> = ["Beverages","Condiments","Seafood","Produce","Meat/Poultry", "Confections"];
+  //public defaultItem: { text: string, value: number } = this.listItems[2];
 
   public show: boolean = true;
 }
