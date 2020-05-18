@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgModule } from '@angular/core';
 
-import { products } from './products';
+import { products, sampleProducts } from './products';
 
 @Component({
     selector: 'app-root',
@@ -16,7 +16,7 @@ import { products } from './products';
             <kendo-grid-column title="Roles">
               <ng-template kendoGridCellTemplate let-dataItem>
               <kendo-dropdownlist
-                  [defaultItem]="dataItem.Category.CategoryName"
+                  [defaultItem]="getCategoryName(dataItem.CategoryID)"
                   [data]="listItems"
               >
               </kendo-dropdownlist>
@@ -41,8 +41,20 @@ import { products } from './products';
 })
 export class AppComponent {
   public gridData: any[] = products;
+
   public listItems: Array<string> = ["Beverages","Condiments","Seafood","Produce","Meat/Poultry", "Confections"];
   //public defaultItem: { text: string, value: number } = this.listItems[2];
 
   public show: boolean = true;
+
+  getCategoryName(id){
+    let newData: any[] = sampleProducts;
+    for(var item of newData){
+      if(item.CategoryID == id){
+        //console.log(id, item)
+        return item.Category.CategoryName
+      }
+    }
+    return "Default"
+  }
 }

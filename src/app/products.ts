@@ -191,7 +191,7 @@ export const products = [{
     "UnitsInStock": 39,
     "UnitsOnOrder": 0,
     "ReorderLevel": 10,
-    "Discontinued": false,
+    "Discontinued": true,
     "Category": {
         "CategoryID": 1,
         "CategoryName": "Beverages",
